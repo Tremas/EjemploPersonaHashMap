@@ -53,7 +53,7 @@ public class MainPersona {
         Scanner scan = new Scanner(System.in);
         System.out.println("Buscar persona por Nombre \nIntroduce el Nombre:");
         String nom=scan.next();
-        if(mapIdPersona.containsKey(nom)){ System.out.println("Usuario "+mapNombrePersona.get(nom));}else{
+        if(mapNombrePersona.containsKey(nom)){ System.out.println("Usuario "+mapNombrePersona.get(nom));}else{
             System.out.println("Nombre introducida es incorrecta");
 
         }
@@ -62,7 +62,7 @@ public class MainPersona {
         Scanner scan = new Scanner(System.in);
         System.out.println("Buscar persona por DNI \nIntroduce el DNI:");
         String dni=scan.next();
-        if(mapIdPersona.containsKey(dni)){ System.out.println("Usuario "+mapDniPersona.get(dni));}else{
+        if(mapDniPersona.containsKey(dni)){ System.out.println("Usuario "+mapDniPersona.get(dni));}else{
             System.out.println("Dni introducida es incorrecta");
 
         }
