@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by professor on 28/06/2016.
  */
-public class Persona {
+public class Persona implements  Comparable<Persona> {
     /*id long, dni string, nom string , edad int
     *
     * 11 personsa
@@ -70,5 +70,10 @@ public class Persona {
                 ", nom='" + nom + '\'' +
                 ", edad=" + edad +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Persona persona) {
+        return 0;
     }
 }
