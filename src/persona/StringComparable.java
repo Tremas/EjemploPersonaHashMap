@@ -14,7 +14,11 @@ public class StringComparable {
 
         Integer x=1;
         Integer y =-3;
-        System.out.println(x.compareTo(y));
+        //System.out.println(x.compareTo(y));
+        Persona ivan = new Persona(1L,"111111","Ivan",11);
+        Persona koko = new Persona(2L,"222222","Koko",35);
+
+        System.out.println(ivan.compareTo(koko));
 
     }
 }

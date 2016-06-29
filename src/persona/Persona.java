@@ -74,6 +74,15 @@ public class Persona implements  Comparable<Persona> {
 
     @Override
     public int compareTo(Persona persona) {
-        return 0;
+
+        if (this.edad>persona.edad){
+            return 1;
+
+        }else if(this.edad<persona.edad){
+            return -1;
+        }else{
+            return 0;
+        }
+
     }
 }
