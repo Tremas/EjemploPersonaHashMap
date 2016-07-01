@@ -1,5 +1,7 @@
 package Coche;
 
+import java.util.Comparator;
+
 /**
  * Created by professor on 29/06/2016.
  */
@@ -71,11 +73,37 @@ public class Coche implements Comparable<Coche>{
 
     @Override
     public int compareTo(Coche coche) {
-        /*if(this.matricula.compareTo(coche.matricula)>=1){
+      /* if(this.matricula.compareTo(coche.matricula)>=1){
                 return 1;
         }else if (this.matricula.compareTo(coche.matricula)<=-1){
             return -1;
         }else{return 0;}*/
+
+        System.out.println("Comparando matriculas");
+
         return this.matricula.compareTo(coche.matricula);
+    }
+}
+class AnyComp implements Comparator<Coche> {
+
+    @Override
+    public int compare(Coche c1, Coche c2) {
+
+        if(c1.getAño() > c2.getAño()){
+            return 1;
+        }else if(c1.getAño() < c2.getAño()){return -1;}
+        else {
+            return 0;
+        }
+        //return c1.getAño().compareTo(c2.getAño());
+    }
+}
+
+class MarcaComp implements Comparator<Coche>{
+
+
+    @Override
+    public int compare(Coche c1, Coche c2) {
+        return 0;
     }
 }

@@ -1,5 +1,8 @@
 package poliedros;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+
 import java.util.*;
 
 
@@ -12,6 +15,7 @@ public class MapColores {
     //primero pedir los colores que quiero añadir y añadirlos al array
     //segundo preguntar cuantos poliedros quiero añadir de cada tipo
     //tercero acer un bucle
+    private static ListMultimap<String, Poliedro> multimapPoliedro = ArrayListMultimap.create();
     public static String colorArray[];
     public static final String ROJO = "Rojo";
     public static final String AMARILLO = "Amarillo";
@@ -26,27 +30,35 @@ public class MapColores {
 
         List<Poliedro> arrayList = new ArrayList<>();
        /* System.out.println("Introduce el numero de  poliedros para cada tipo:  ");*/
-        int numero = 5; //sc.nextInt();
+       /* int numero = 5; //sc.nextInt();
         System.out.println("Introduce cuantos colores quires");
         Scanner Colores= new Scanner(System.in);
         int numColores=Colores.nextInt();
         for(int i=0;i<numColores;i++) {
             System.out.println("Introduce el color ("+i+" de "+numColores+")");
             colorArray[i]=Colores.next();
-        }
+        }*/
         System.out.println("Introduce cuantos poliedros introduciras de cada tipo");
-        int numeroPoli=sc.nextInt();
+        int numero=sc.nextInt();
 
 
-       /* agregarTetaedro(sc, arrayList, numero);
+        agregarTetaedro(sc, arrayList, numero);
 
         agregarHexaedro(sc, arrayList, numero);
         agregarOctaedro(sc, arrayList, numero);
-        agregarDodecaedro(sc, arrayList, numero);*/
+        agregarDodecaedro(sc, arrayList, numero);
         agregarIcosaedro(sc, arrayList, numero);
-        mostrarCubos();
+        //mostrarCubos();
+
+       // for (Poliedro poliedro: multimapPoliedro) {
 
 
+        //System.out.println(multimapPoliedro);
+        for (String colores : multimapPoliedro.keySet()) {
+            List<Poliedro> lastNames = multimapPoliedro.get(colores);
+            System.out.println(colores + ": " + lastNames);
+        }
+        //}
 
 
 
@@ -60,68 +72,86 @@ public class MapColores {
     }
 
 
-    private static void agregarIcosaedro(Scanner sc, List<Poliedro> arrayList, int numero) {
-        List<Icosaedro> cuboListRojo = new ArrayList<>();
-        List<Icosaedro> cuboListAmarillo = new ArrayList<>();
-        List<Icosaedro> cuboListAzul = new ArrayList<>();
-        for(int i=1; i<=numero; i++)
+//    private static void agregarIcosaedro(Scanner sc, List<Poliedro> arrayList, int numero) {
+//        List<Icosaedro> cuboListRojo = new ArrayList<>();
+//        List<Icosaedro> cuboListAmarillo = new ArrayList<>();
+//        List<Icosaedro> cuboListAzul = new ArrayList<>();
+//        for(int i=1; i<=numero; i++)
+//
+//        {
+//            System.out.println("Introduce los datos del Icosaedro "+ROJO/*(i+(numero*4))*/);
+//            System.out.println("Introduce la medida de la arista:");
+//            double arista = sc.nextDouble();
+//            String colorSelected=ROJO;
+//            //System.out.println("El color seleccionado es :"+ colorSelected);
+//            Icosaedro cubo = new Icosaedro(i/*+(numero*4)*/,arista,colorSelected);
+//            //arrayList.add(new Icosaedro(i+(numero*4),arista,colorSelected));
+//            arrayList.add(cubo);
+//            cuboListRojo.add(cubo);
+//
+//
+//        }
+//        for(int i=1; i<=numero; i++)
+//
+//        {
+//            System.out.println("Introduce los datos del Icosaedro "+AMARILLO/*(i+(numero*4))*/);
+//            System.out.println("Introduce la medida de la arista:");
+//            double arista = sc.nextDouble();
+//            String colorSelected=AMARILLO;
+//            //System.out.println("El color seleccionado es :"+ colorSelected);
+//            Icosaedro cubo = new Icosaedro(i+(numero*2),arista,colorSelected);
+//            //arrayList.add(new Icosaedro(i+(numero*4),arista,colorSelected));
+//            arrayList.add(cubo);
+//            cuboListAmarillo.add(cubo);
+//
+//
+//        }
+//        for(int i=1; i<=numero; i++)
+//
+//        {
+//            System.out.println("Introduce los datos del Icosaedro "+AZUL/*(i+(numero*4))*/);
+//            System.out.println("Introduce la medida de la arista:");
+//            double arista = sc.nextDouble();
+//            String colorSelected=AZUL;
+//            //System.out.println("El color seleccionado es :"+ colorSelected);
+//            Icosaedro cubo = new Icosaedro(i+(numero*3),arista,colorSelected);
+//            //arrayList.add(new Icosaedro(i+(numero*4),arista,colorSelected));
+//            arrayList.add(cubo);
+//            cuboListAzul.add(cubo);
+//
+//
+//        }
+//        mapColoresPoliedro.put(ROJO,cuboListRojo);
+//        mapColoresPoliedro.put(AMARILLO,cuboListAmarillo);
+//        mapColoresPoliedro.put(AZUL,cuboListAzul);
+//
+//
+//    }
+private static void agregarIcosaedro(Scanner sc, List<Poliedro> arrayList, int numero) {
+    List<Icosaedro> cuboList = new ArrayList<>();
+    for(int i=1; i<=numero; i++)
 
-        {
-            System.out.println("Introduce los datos del Icosaedro "+ROJO/*(i+(numero*4))*/);
-            System.out.println("Introduce la medida de la arista:");
-            double arista = sc.nextDouble();
-            String colorSelected=ROJO;
-            //System.out.println("El color seleccionado es :"+ colorSelected);
-            Icosaedro cubo = new Icosaedro(i/*+(numero*4)*/,arista,colorSelected);
-            //arrayList.add(new Icosaedro(i+(numero*4),arista,colorSelected));
-            arrayList.add(cubo);
-            cuboListRojo.add(cubo);
-
-
-        }
-        for(int i=1; i<=numero; i++)
-
-        {
-            System.out.println("Introduce los datos del Icosaedro "+AMARILLO/*(i+(numero*4))*/);
-            System.out.println("Introduce la medida de la arista:");
-            double arista = sc.nextDouble();
-            String colorSelected=AMARILLO;
-            //System.out.println("El color seleccionado es :"+ colorSelected);
-            Icosaedro cubo = new Icosaedro(i+(numero*2),arista,colorSelected);
-            //arrayList.add(new Icosaedro(i+(numero*4),arista,colorSelected));
-            arrayList.add(cubo);
-            cuboListAmarillo.add(cubo);
-
-
-        }
-        for(int i=1; i<=numero; i++)
-
-        {
-            System.out.println("Introduce los datos del Icosaedro "+AZUL/*(i+(numero*4))*/);
-            System.out.println("Introduce la medida de la arista:");
-            double arista = sc.nextDouble();
-            String colorSelected=AZUL;
-            //System.out.println("El color seleccionado es :"+ colorSelected);
-            Icosaedro cubo = new Icosaedro(i+(numero*3),arista,colorSelected);
-            //arrayList.add(new Icosaedro(i+(numero*4),arista,colorSelected));
-            arrayList.add(cubo);
-            cuboListAzul.add(cubo);
-
-
-        }
-        mapColoresPoliedro.put(ROJO,cuboListRojo);
-        mapColoresPoliedro.put(AMARILLO,cuboListAmarillo);
-        mapColoresPoliedro.put(AZUL,cuboListAzul);
-
+    {
+        System.out.println("Introduce los datos del Icosaedro "+(i));
+        System.out.println("Introduce la medida de la arista:");
+        double arista = sc.nextDouble();
+        String colorSelected=seleccionarColor();
+        System.out.println("El color seleccionado es :"+ colorSelected);
+        Icosaedro cubo = new Icosaedro(i+(numero*4),arista,colorSelected);
+        //arrayList.add(new Icosaedro(i+(numero*4),arista,colorSelected));
+        arrayList.add(cubo);
+        cuboList.add(cubo);
+        multimapPoliedro.put(cubo.getColor(),cubo);
 
     }
-
-   /* private static void agregarDodecaedro(Scanner sc, List<Poliedro> arrayList, int numero) {
+   // mapPoliedro.put(CUBOS,cuboList);
+}
+    private static void agregarDodecaedro(Scanner sc, List<Poliedro> arrayList, int numero) {
         List<Dodecaedro> dodecaedroList = new ArrayList<>();
         for(int i=1; i<=numero; i++)
 
         {
-            System.out.println("Introduce los datos del Dodecaedro "+(i+(numero*3)));
+            System.out.println("Introduce los datos del Dodecaedro "+(i));
             System.out.println("Introduce la medida de la arista:");
             double arista = sc.nextDouble();
             String colorSelected=seleccionarColor();
@@ -131,9 +161,10 @@ public class MapColores {
             // arrayList.add(new Dodecaedro(i+(numero*3),arista,colorSelected));
             arrayList.add(dodecaedro);
             dodecaedroList.add(dodecaedro);
-
+            multimapPoliedro.put(dodecaedro.getColor(),dodecaedro);
         }
-        mapPoliedro.put(DODEACAEDROOS,dodecaedroList);
+        //mapPoliedro.put(DODEACAEDROOS,dodecaedroList);
+
     }
 
     private static void agregarOctaedro(Scanner sc, List<Poliedro> arrayList, int numero) {
@@ -141,7 +172,7 @@ public class MapColores {
         for(int i=1; i<=numero; i++)
 
         {
-            System.out.println("Introduce los datos del Octaedro "+(i+(numero*2)));
+            System.out.println("Introduce los datos del Octaedro "+(i));
             System.out.println("Introduce la medida de la arista:");
             double arista = sc.nextDouble();
             String colorSelected=seleccionarColor();
@@ -150,11 +181,11 @@ public class MapColores {
             Octaedro octaedro = new Octaedro(i+(numero*2),arista,colorSelected);
             arrayList.add(octaedro);
             octaedroList.add(octaedro);
-
+            multimapPoliedro.put(octaedro.getColor(),octaedro);
 
 
         }
-        mapPoliedro.put(OCTAEDROOS,octaedroList);
+        //mapPoliedro.put(OCTAEDROOS,octaedroList);
     }
 
     private static void agregarHexaedro(Scanner sc, List<Poliedro> arrayList, int numero) {
@@ -162,7 +193,7 @@ public class MapColores {
         for(int i=1; i<=numero; i++)
 
         {
-            System.out.println("Introduce los datos del Hexaedro "+(i+numero));
+            System.out.println("Introduce los datos del Hexaedro "+(i));
             System.out.println("Introduce la medida de la arista:");
             double arista = sc.nextDouble();
             String colorSelected=seleccionarColor();
@@ -171,10 +202,10 @@ public class MapColores {
             Hexaedro hexaedro = new Hexaedro(i+numero,arista,colorSelected);
             arrayList.add(hexaedro);
             hexaedroList.add(hexaedro);
-
+            multimapPoliedro.put(hexaedro.getColor(),hexaedro);
 
         }
-        mapPoliedro.put(HEXAEDROOS,hexaedroList);
+       // mapPoliedro.put(HEXAEDROOS,hexaedroList);
     }
 
     private static void agregarTetaedro(Scanner sc, List<Poliedro> arrayList, int numero) {
@@ -191,9 +222,9 @@ public class MapColores {
             Tetaedro tetaedro = new Tetaedro(i,radio,colorSelected);
             arrayList.add(tetaedro);
             tetaedroList.add(tetaedro);
-
+            multimapPoliedro.put(tetaedro.getColor(),tetaedro);
         }
-        mapPoliedro.put(TETAEDROOS,tetaedroList);
+        //mapPoliedro.put(TETAEDROOS,tetaedroList);
     }
 
     public static String seleccionarColor(){
@@ -227,5 +258,5 @@ public class MapColores {
                 break;
         }
         return color;
-    }*/
+    }
 }
