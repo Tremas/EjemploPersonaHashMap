@@ -62,20 +62,19 @@ public class mainCoche {
         cochePriorityQueue.add(c5);
 
 
-        Coche c= cochePriorityQueue.poll();
+      /*  Coche c= cochePriorityQueue.poll();
 
         while(c!=null){
 
             System.out.println(c);
             c= cochePriorityQueue.poll();
-        }
+        }*/
 
 
-        /*for (Coche coche: cochePriorityQueue) {
+        for (Coche coche: cochePriorityQueue) {
             System.out.println(coche);
 
         }
-*/
         //for (Coche coche : US_PRESIDENTS_IN_ORDER) {
        /*     multimap.put(c1.getEdad(), c1);
         multimap.put(c1.getId(), c1);

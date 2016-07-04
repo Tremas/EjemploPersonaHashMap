@@ -55,8 +55,8 @@ public class MapColores {
 
         //System.out.println(multimapPoliedro);
         for (String colores : multimapPoliedro.keySet()) {
-            List<Poliedro> lastNames = multimapPoliedro.get(colores);
-            System.out.println(colores + ": " + lastNames);
+            List<Poliedro> poliedro = multimapPoliedro.get(colores);
+            System.out.println(colores + ": " + poliedro);
         }
         //}
 
