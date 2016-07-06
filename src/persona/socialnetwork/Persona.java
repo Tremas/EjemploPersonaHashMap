@@ -55,11 +55,11 @@ public class Persona implements Comparable<Persona> {
 
     @Override
     public String toString() {
-        return "Persona{" +
+        return System.lineSeparator()+"Persona{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido +
-                '}'+System.lineSeparator();
+                '}';
     }
 
     @Override

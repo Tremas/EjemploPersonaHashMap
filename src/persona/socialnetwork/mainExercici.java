@@ -49,14 +49,30 @@ public class mainExercici {
         socialNetwork.addAmigo(marc,juan);
 
         //socialNetwork.getAmigos(cristina);
-        System.out.println("1--------------------------------");
+        System.out.println("1 Especificando una persona como parámetro, el programa tiene que mostrar la pareja de esa persona (si es que tiene pareja).");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
         System.out.println(socialNetwork.getPareja(socialNetwork.getPersona("Marc")));
-        System.out.println("2-----------------------------------");
+        System.out.println("2  Especificando una persona como parámetro, el programa tiene que mostrar todos los amigos de esa persona.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
         //for (Persona p1: socialNetwork.getAmigos(socialNetwork.getPersona(2L))) {
             System.out.println(socialNetwork.getAmigos(socialNetwork.getPersona("Marc")));
-        System.out.println("3---------------------------------");
+        System.out.println("3 Especificando una persona como parámetro, el programa tiene que mostrar todos los amigos de la pareja de esa persona");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
+
+        System.out.println(socialNetwork.getAmigosDePareja(socialNetwork.getPersona("Marc")));
+        System.out.println("4 Especificando una persona como parámetro, el programa tiene que mostrar las parejas de los amigos de esa persona");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
         System.out.println(socialNetwork.getParejaDeAmigos(socialNetwork.getPersona("Marc")));
-       // }
+        System.out.println("6  Especificando un grafo de personas y relaciones (amigos y parejas), el programa deberá mostrar el número de amigos (con la información de cada amigo) que tiene cada persona.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
+        socialNetwork.numeroDeAmigos();
+        System.out.println("7 Evoluciona el punto anterior para que el programa muestre las personas, ordenadas, de mayor a menor, según el número de amigos que tiene cada persona.");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
+        socialNetwork.numeroDeAmigosOrdenado();
+        System.out.println("8 Especificando dos personas como parámetros A y B, el programa ha de mostrar el grado de amistad entre esas dos personas.\n Si hay una conexión directa, el grado de amistad será 1, si la conexión es a través de un amigo en común, el grado de amistad será 2, y así sucesivamente.\n");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
+
+        // }
        /* gente.put(cristina.getNombre(),cristina);
         gente.put(pedro.getNombre(),pedro);
         gente.put(juan.getNombre(),juan);

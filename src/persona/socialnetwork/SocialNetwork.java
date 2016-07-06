@@ -2,6 +2,8 @@ package persona.socialnetwork;
 
 import com.google.common.collect.*;
 import com.sun.deploy.util.OrderedHashSet;
+import com.sun.xml.internal.ws.model.RuntimeModelerException;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import java.util.*;
 
@@ -14,21 +16,42 @@ public class SocialNetwork {
     private BiMap<Persona,Persona> pareja = HashBiMap.create();
    // private Multimap<Persona,Persona> amigos = ArrayListMultimap.create();
     private Multimap<Persona,Persona> amigos = TreeMultimap.create();
+    private Multimap<Integer,Set<Persona>> amigosSortedNumFriends = TreeMultimap.create(Ordering.natural().reverse(),Ordering.allEqual());
     public void addPersona(Persona persona){
+        if(genteByID.containsKey(persona.getId())||genteByID.containsValue(persona)){
+            System.out.println("La id de  "+ persona.getNombre()+" ya esta introducida");
+            throw new RuntimeException("La id de \"+ persona.getNombre()+\" ya esta introducida");
+
+        }else  if(genteByNombre.containsKey(persona.getNombre())||genteByNombre.containsValue(persona)){
+            System.out.println("El nombre de "+ persona.getNombre()+" ya esta introducido");
+            throw new RuntimeException("El nombre de \"+ persona.getNombre()+\" ya esta introducido");
+        }
+
         genteByNombre.put(persona.getNombre(),persona);
         genteByID.put(persona.getId(),persona);
 
     }
     public Persona getPersona(Long id){
        // gente.get(id);
+
         return genteByID.get(id);
     }//demomento  1 persona pero tendria que devoler un lsitado
     public Persona getPersona(String nombre){
 
         return  genteByNombre.get(nombre);}
     public void addPareja(Persona p1,Persona p2){
-    pareja.put(p1,p2);
+        CheckPareja(p1);
+        CheckPareja(p2);
+        //pareja.values().contains(p1);
+        pareja.put(p1,p2);
 
+    }
+
+    private void CheckPareja(Persona p1) {
+        if(pareja.containsKey(p1)||pareja.values().contains(p1)){
+            System.out.println("La persona "+ p1.getNombre()+" ya tiene pareja");
+            throw new RuntimeException("La persona "+ p1.getNombre()+" ya tiene pareja");
+        }
     }
 
     public Persona getPareja(Persona p1){
@@ -47,8 +70,10 @@ public class SocialNetwork {
         }
     }
     public void addAmigo(Persona p1,Persona p2){
-        amigos.put(p1,p2);
-        amigos.put(p2,p1);
+
+            amigos.put(p1, p2);
+
+            amigos.put(p2,p1);
 
     }
     public Set<Persona> getAmigos(Persona p1){
@@ -60,13 +85,78 @@ public class SocialNetwork {
         return amigosParejaSet;
     }
     public Set<Persona> getParejaDeAmigos(Persona p1){
-        Persona p2= getPareja(p1);
-
-        Set<Persona> ParejaDeAmigosSet= getAmigos(p2);
-        return  ParejaDeAmigosSet;
+       Set<Persona> gAmigos=getAmigos(p1);
+        Set<Persona> pTree= new TreeSet<>();
+        // Persona p2= getPareja(p1);
+        for (Persona p2: gAmigos) {
+            Persona ParejaDeAmigosObjectt= getPareja(p2);
+            pTree.add(ParejaDeAmigosObjectt);
+        }
+//
+        return pTree;
     }
 
-    public void numeroDeAmigos(){}
+    public void numeroDeAmigos(){
+
+        for (Persona p1: amigos.keySet()) {
+            if(getAmigos(p1).size()==1){
+                System.out.println(p1.getNombre()+" tiene "+getAmigos(p1).size()+" amigos\nQue es:\n"+getAmigos(p1));
+            }else{ System.out.println(p1.getNombre()+" tiene "+getAmigos(p1).size()+" amigos\nQue son:\n"+getAmigos(p1));
+
+            }
+
+        }
+    }
+    public void numeroDeAmigosOrdenado(){
+
+       /* Set<Persona> personasPopulares = new TreeSet<>(new Comparator<Persona>() {
+            @Override
+            public int compare(Persona persona, Persona t1) {
+                Integer num1=getAmigos(persona).size();
+                Integer num2=getAmigos(t1).size();
+
+                return num2.compareTo(num1);
+            }
+        });*/
+        List<Persona> personasPopulares = new ArrayList<>();
+        Map<Persona,Integer> contAmigos= new HashMap<>();
+
+        for (Persona p1: amigos.keySet()) {
+             personasPopulares.add(p1);
+            contAmigos.put(p1,getAmigos(p1).size());
+        }
+        Collections.sort(personasPopulares,new Comparator<Persona>() {
+            @Override
+            public int compare(Persona persona, Persona t1) {
+                Integer num1=getAmigos(persona).size();
+                Integer num2=getAmigos(t1).size();
+
+                return num2.compareTo(num1);
+            }
+        }) ;
+
+        System.out.println(contAmigos);
+        System.out.println(personasPopulares);
+       /* System.out.println (Collections.sort(personasPopulares,new Comparator<Persona>() {
+            @Override
+            public int compare(Persona persona, Persona t1) {
+                Integer num1=getAmigos(persona).size();
+                Integer num2=getAmigos(t1).size();
+
+                return num2.compareTo(num1);
+            }
+        }) );*/
+
+
+       /*for (Persona p1: amigos.keySet()) {
+           // for (Persona p2: amigos.keySet()) {
+                amigosSortedNumFriends.put(""+getAmigos(p1).size()+" "+p1.getNombre(),getAmigos(p1));
+
+           // }
+        }*/
+
+        //System.out.println(amigosSortedNumFriends);
+    }
 
     public Set<Persona>getGentePopular(Persona persona){return  null;}// devuileva de mayor a menos al gente ke tenga mas amigos
     public int getConexionGrado(Persona p1,Persona p2){return 0;}
