@@ -27,6 +27,8 @@ public class mainExercici {
         Persona ana = new Persona(6L,"Ana","Gómez");
         Persona antonio = new Persona(7L,"Antonio","Martínez");
         Persona marc = new Persona(8L,"Marc","Bernadi");
+        Persona marcelo = new Persona(9L,"Marcelo","Bernadi");
+        Persona pepito = new Persona(10L,"Pepito","Bernadi");
         SocialNetwork socialNetwork = new SocialNetwork();
         socialNetwork.addPersona(cristina);
         socialNetwork.addPersona(pedro);
@@ -36,6 +38,8 @@ public class mainExercici {
         socialNetwork.addPersona(ana);
         socialNetwork.addPersona(antonio);
         socialNetwork.addPersona(marc);
+        socialNetwork.addPersona(marcelo);
+        socialNetwork.addPersona(pepito);
         socialNetwork.addPareja(cristina,juan);
         socialNetwork.addPareja(antonio,pedro);
         socialNetwork.addPareja(ana,marc);
@@ -47,6 +51,8 @@ public class mainExercici {
         socialNetwork.addAmigo(antonio,marc);
         socialNetwork.addAmigo(antonio,juan);
         socialNetwork.addAmigo(marc,juan);
+        socialNetwork.addAmigo(juan,pepito);
+        //socialNetwork.addAmigo(marcelo,pepito);
 
         //socialNetwork.getAmigos(cristina);
         System.out.println("1 Especificando una persona como parámetro, el programa tiene que mostrar la pareja de esa persona (si es que tiene pareja).");
@@ -71,7 +77,7 @@ public class mainExercici {
         socialNetwork.numeroDeAmigosOrdenado();
         System.out.println("8 Especificando dos personas como parámetros A y B, el programa ha de mostrar el grado de amistad entre esas dos personas.\n Si hay una conexión directa, el grado de amistad será 1, si la conexión es a través de un amigo en común, el grado de amistad será 2, y así sucesivamente.\n");
         System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
-
+        System.out.println(""+socialNetwork.getConexionGrado(ana,cristina));
         // }
        /* gente.put(cristina.getNombre(),cristina);
         gente.put(pedro.getNombre(),pedro);
