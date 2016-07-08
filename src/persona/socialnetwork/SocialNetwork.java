@@ -161,15 +161,15 @@ public class SocialNetwork {
     public Set<Persona>getGentePopular(Persona persona){return  null;}// devuileva de mayor a menos al gente ke tenga mas amigos
     public int getConexionGrado(Persona p1,Persona p2){
         //Map<Persona,Boolean> personaVisitada=new HashMap<>();
-        Set<Persona> personaVisitada=new TreeSet<>();
+        Set<Persona> personasVisitadas=new TreeSet<>();
         Queue<Persona> colaAmigos= new LinkedList<>();
-        /*1.-Recorrer amigos de la persona, añadir a la cola,esos amigos, por cada amigo que comprobemos, añadirlo al hashmap
+        /*1.-Recorrer amigos de la persona, añadir a la cola,esos amigos, por cada amigo que comprobemos, añadirlo al treeset
         * 2.-Despues de recorrer los amigos si no se encotrado, los amigos estan en una cola cojemos el primero en la cola  i buscamos sus amigos  i emepzamo como en el paso 1
         * 3.- saldra del buccle si lo encunetra  o no , tiene que haber una comprobacion si de si el amigo esta en amigo visitados para que no se haga un bucle infinito
         *
         * */
         boolean trobat= false;
-        personaVisitada.add(p1);
+        personasVisitadas.add(p1);
         Set<Persona> gAmigos=getAmigos(p1);
 
         for (Persona amigo: gAmigos) {
@@ -180,7 +180,7 @@ public class SocialNetwork {
            bucle:
             while (true) {
 
-                if((colaAmigos.peek()!=null)&&(personaVisitada.contains(colaAmigos.peek()))){
+                if((colaAmigos.peek()!=null)&&(personasVisitadas.contains(colaAmigos.peek()))){
                     colaAmigos.poll();continue bucle;
                 }
 
@@ -191,7 +191,7 @@ public class SocialNetwork {
 
 
             if(nextPerson!=null) {
-                personaVisitada.add(nextPerson);
+                personasVisitadas.add(nextPerson);
                 if(nextPerson.equals(p2)){
                     trobat=true;
 
