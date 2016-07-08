@@ -161,7 +161,7 @@ public class SocialNetwork {
     public Set<Persona>getGentePopular(Persona persona){return  null;}// devuileva de mayor a menos al gente ke tenga mas amigos
     public int getConexionGrado(Persona p1,Persona p2){
         //Map<Persona,Boolean> personaVisitada=new HashMap<>();
-        Set<Persona> personasVisitadas=new TreeSet<>();
+        Set<Persona> personasVisitadas=new HashSet<>();
         Queue<Persona> colaAmigos= new LinkedList<>();
         /*1.-Recorrer amigos de la persona, añadir a la cola,esos amigos, por cada amigo que comprobemos, añadirlo al treeset
         * 2.-Despues de recorrer los amigos si no se encotrado, los amigos estan en una cola cojemos el primero en la cola  i buscamos sus amigos  i emepzamo como en el paso 1
@@ -177,39 +177,38 @@ public class SocialNetwork {
 
         }
         while(trobat==false){
-           bucle:
+            bucle:
             while (true) {
 
                 if((colaAmigos.peek()!=null)&&(personasVisitadas.contains(colaAmigos.peek()))){
                     colaAmigos.poll();continue bucle;
                 }
 
-                break bucle;
-            }
-
-            Persona nextPerson=colaAmigos.peek();
+               break bucle;
+              }
 
 
-            if(nextPerson!=null) {
-                personasVisitadas.add(nextPerson);
-                if(nextPerson.equals(p2)){
-                    trobat=true;
+                Persona nextPerson=colaAmigos.peek();
+                if(nextPerson!=null) {
+                    personasVisitadas.add(nextPerson);
+                    if(nextPerson.equals(p2)){
+                        trobat=true;
 
-                    return 1;
+                        return 1;
+
+                    }
+
+                    Set<Persona> amigoDeAmigo = getAmigos(nextPerson);
+
+                    for (Persona amigo1 : amigoDeAmigo) {
+                        colaAmigos.offer(amigo1);
+
+                    }
+                    colaAmigos.poll();
+                }else{
+                    return 0;
 
                 }
-
-                Set<Persona> amigoDeAmigo = getAmigos(nextPerson);
-
-                for (Persona amigo1 : amigoDeAmigo) {
-                    colaAmigos.offer(amigo1);
-
-                }
-                colaAmigos.poll();
-            }else{
-                return 0;
-
-            }
         }
 
 
@@ -218,5 +217,37 @@ public class SocialNetwork {
 
 
         return 0;}
+
+    public boolean consultarGradoConexion(Persona persona1, Persona persona2) { // devuelve el grado de conexion entre dos personas (1, 2, 3 ...)
+
+        Set<Persona> personasVisitadas = new HashSet<>();
+        Queue<Persona> colaPersonas = new LinkedList<>();
+
+        Persona siguientePersona = persona1;
+        boolean amigoEncontrado = false;
+        personasVisitadas.add(persona1);
+
+        while (siguientePersona != null) {
+
+            for (Persona amigo : getAmigos(siguientePersona)) {
+
+                if (amigo.equals(persona2)) {
+                    amigoEncontrado = true;
+                    break;
+                }
+
+                if (!personasVisitadas.contains(amigo)) {
+
+                    personasVisitadas.add(amigo);
+                    colaPersonas.offer(amigo);
+
+                }
+            }
+
+            siguientePersona = colaPersonas.poll();
+        }
+
+        return amigoEncontrado;
+    }
     public SortedSet<Persona>getGradoConexion(Persona p1,Persona p2){return  null;}
 }
