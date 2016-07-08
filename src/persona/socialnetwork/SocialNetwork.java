@@ -183,17 +183,7 @@ public class SocialNetwork {
                 if((colaAmigos.peek()!=null)&&(personaVisitada.contains(colaAmigos.peek()))){
                     colaAmigos.poll();continue bucle;
                 }
-                /*if(personaVisitada.get(colaAmigos.peek())){
-                    colaAmigos.poll();continue bucle;
-                }/*
 
-                /*for (Persona personavisited : personaVisitada.keySet()) {
-                    if (colaAmigos.peek().equals(personavisited)) {
-                        colaAmigos.poll();
-                        continue bucle;
-                    }
-
-                }*/
                 break bucle;
             }
 
