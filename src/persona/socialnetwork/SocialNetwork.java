@@ -160,7 +160,8 @@ public class SocialNetwork {
 
     public Set<Persona>getGentePopular(Persona persona){return  null;}// devuileva de mayor a menos al gente ke tenga mas amigos
     public int getConexionGrado(Persona p1,Persona p2){
-        Map<Persona,Boolean> personaVisitada=new HashMap<>();
+        //Map<Persona,Boolean> personaVisitada=new HashMap<>();
+        Set<Persona> personaVisitada=new TreeSet<>();
         Queue<Persona> colaAmigos= new LinkedList<>();
         /*1.-Recorrer amigos de la persona, añadir a la cola,esos amigos, por cada amigo que comprobemos, añadirlo al hashmap
         * 2.-Despues de recorrer los amigos si no se encotrado, los amigos estan en una cola cojemos el primero en la cola  i buscamos sus amigos  i emepzamo como en el paso 1
@@ -168,7 +169,7 @@ public class SocialNetwork {
         *
         * */
         boolean trobat= false;
-        personaVisitada.put(p1,true);
+        personaVisitada.add(p1);
         Set<Persona> gAmigos=getAmigos(p1);
 
         for (Persona amigo: gAmigos) {
@@ -179,36 +180,43 @@ public class SocialNetwork {
            bucle:
             while (true) {
 
+                if((colaAmigos.peek()!=null)&&(personaVisitada.contains(colaAmigos.peek()))){
+                    colaAmigos.poll();continue bucle;
+                }
                 /*if(personaVisitada.get(colaAmigos.peek())){
                     colaAmigos.poll();continue bucle;
-                }*/
+                }/*
 
-                for (Persona personavisited : personaVisitada.keySet()) {
+                /*for (Persona personavisited : personaVisitada.keySet()) {
                     if (colaAmigos.peek().equals(personavisited)) {
                         colaAmigos.poll();
                         continue bucle;
                     }
 
-                }
+                }*/
                 break bucle;
             }
-            if(colaAmigos.peek().equals(p2)){
-                trobat=true;
 
-                return 1;
-
-            }
             Persona nextPerson=colaAmigos.peek();
+
+
             if(nextPerson!=null) {
+                personaVisitada.add(nextPerson);
+                if(nextPerson.equals(p2)){
+                    trobat=true;
+
+                    return 1;
+
+                }
+
                 Set<Persona> amigoDeAmigo = getAmigos(nextPerson);
 
                 for (Persona amigo1 : amigoDeAmigo) {
                     colaAmigos.offer(amigo1);
 
                 }
-            }
-            personaVisitada.put(nextPerson,true);
-            if(colaAmigos.poll()==null){
+                colaAmigos.poll();
+            }else{
                 return 0;
 
             }

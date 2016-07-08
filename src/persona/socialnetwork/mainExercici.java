@@ -77,7 +77,7 @@ public class mainExercici {
         socialNetwork.numeroDeAmigosOrdenado();
         System.out.println("8 Especificando dos personas como parámetros A y B, el programa ha de mostrar el grado de amistad entre esas dos personas.\n Si hay una conexión directa, el grado de amistad será 1, si la conexión es a través de un amigo en común, el grado de amistad será 2, y así sucesivamente.\n");
         System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println(""+socialNetwork.getConexionGrado(ana,cristina));
+        System.out.println(""+socialNetwork.getConexionGrado(marc,ana));
         // }
        /* gente.put(cristina.getNombre(),cristina);
         gente.put(pedro.getNombre(),pedro);
